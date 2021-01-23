@@ -7,10 +7,10 @@
 
 // getCriminals()
 // let criminals = useCriminals()
-// import { CriminalList } from "./criminals/CriminalList.js"
+import { CriminalList } from "./criminals/CriminalList.js"
 
-// CriminalList();
+CriminalList();
 
-import { OfficerList } from "./officers/OfficerList.js"
+// import { OfficerList } from "./officers/OfficerList.js"
 
-OfficerList();
+// OfficerList();

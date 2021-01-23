@@ -4,7 +4,27 @@
     /* border:  1px solid red; */
 }
 
+h2 {
+    margin-bottom: 10px;
+}
+
 li {
     list-style-type: none;
     margin: 5px auto;
+}
+
+.criminalLIst {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.criminalLIst > div {
+    /* background: gray; */
+    padding: 1em;
+    /* flex-grow: 1; */
+    flex-basis: 25%;
+    margin-bottom: 10px;
+    border: 1px solid gray;
+    border-radius: 15px;
 }
