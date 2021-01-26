@@ -1,6 +1,6 @@
 import { getConvictions, useConvictions } from "./ConvictionProvider.js"
 
-const eventHub = document.querySelector(".filters")
+const eventHub = document.querySelector(".container")
 const contentTarget = document.querySelector(".filters__crime")
 
 // listen for change event
