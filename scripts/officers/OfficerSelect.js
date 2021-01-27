@@ -32,7 +32,7 @@ eventHub.addEventListener("change", event => {
   // custom even for dispatching/listening
   // where value is officer id number as string
   // and offcer id used for option element value attribute
-  const customEvent = new CustomEvent("officerChose", {
+  const customEvent = new CustomEvent("officerChosen", {
    detail: {
     officerChosen: event.target.value
    }

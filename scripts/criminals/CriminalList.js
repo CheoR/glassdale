@@ -1,6 +1,7 @@
 import { getCriminals, useCriminals } from "./CriminalDataProvider.js"
 import { Criminal } from "./Criminal.js"
 import { useConvictions } from "../convictions/ConvictionProvider.js"
+import { useOfficers } from "../officers/OfficerProvider.js";
 
 let contentElement = document.querySelector(".criminalsContainer")
 // export const CriminalList = () => {
@@ -47,10 +48,10 @@ eventHub.addEventListener("crimeChosen", event => {
     */
        const convictionNum = event.detail.crimeThatWasChosen
 
-       const convictionArray = useConvictions()
+       const officerArray = useConvictions()
 
        // Get conviction object by id
-        const convictionObjFromId = convictionArray.find((convictionObj) => convictionObj.id === parseInt(convictionNum))
+        const convictionObjFromId = officerArray.find((officerObj) => officerObj.id === parseInt(convictionNum))
 
         const appStateCriminals = useCriminals()
         const matchingCriminals = appStateCriminals.filter((criminalObj) => criminalObj.conviction === convictionObjFromId.name)    
@@ -78,3 +79,41 @@ export const CriminalList = () => {
             render(appStateCriminals)
         })
 }
+
+eventHub.addEventListener("officerChosen", event => {
+    /*
+        Filter criminals application state down to those that 
+        commited the crime.
+    */
+
+
+   if(event.detail.officerChosen !== "0") {
+    // string representation of number
+    /* 
+        We have the the id of the officer that the user selected
+        from the drop down (event.target.officerChosen). 
+        We need to get the name of the officer
+        associated with the unique identifier. To get the name, we 
+        get the officer object which has the property for name. 
+    */
+   
+    const officerNum = event.detail.officerChosen
+
+    // 1. get array of all officers
+    //  1a. get officer name using officernum/id
+    // 2. get array of all crimnals
+    //  2a. get criminal obj by comparing officer.name to criminalObj.arrestingOfficer
+    // 3. send resulting criminal array to render
+
+    const officerArray = useOfficers()
+    const criminalArray = useCriminals()
+
+    const arrestingOfficer = officerArray.find((officer) => officer.id === parseInt(officerNum))
+    const arrestedCriminals = criminalArray.filter((criminal) => criminal.arrestingOfficer === arrestingOfficer.name)
+
+    render(arrestedCriminals)
+   } else {
+       // show default criminal list
+       CriminalList()
+   }
+})
