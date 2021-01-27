@@ -1,0 +1,1 @@
+export const Alibi = ( criminal )=> `<button id="associates--${criminal.id}">Associate Alibis</button>`
