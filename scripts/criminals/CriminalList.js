@@ -1,5 +1,6 @@
 import { getCriminals, useCriminals } from "./CriminalDataProvider.js"
 import { Criminal } from "./Criminal.js"
+import { useConvictions } from "../convictions/ConvictionProvider.js"
 
 let contentElement = document.querySelector(".criminalsContainer")
 // export const CriminalList = () => {
@@ -33,19 +34,31 @@ eventHub.addEventListener("crimeChosen", event => {
         commited the crime.
     */
 
-   if(event.detail.crimeThatWasChosen !== "0") {
 
-    const crime = event.detail.crimeThatWasChosen
-    const appStateCriminals = useCriminals()
-    const matchingCriminals = appStateCriminals.filter((criminalObj) => criminalObj.conviction === crime)
-    
+   if(event.detail.crimeThatWasChosen !== "0") {
+       // string representation of number
+    /* 
+      We have the the id of the conviction that the user selected
+      from the drop down (event.target.crimeThatWasChosen). But
+        each criminal object has the name of the crime they were
+        convicted for. So we need to get the name of the conviction
+        associated with the unique identifier. To get the name, we 
+        get the conviction object which has the property for name. 
+    */
+       const convictionNum = event.detail.crimeThatWasChosen
+
+       const convictionArray = useConvictions()
+
+       // Get conviction object by id
+        const convictionObjFromId = convictionArray.find((convictionObj) => convictionObj.id === parseInt(convictionNum))
+
+        const appStateCriminals = useCriminals()
+        const matchingCriminals = appStateCriminals.filter((criminalObj) => criminalObj.conviction === convictionObjFromId.name)    
     render(matchingCriminals)
     } else {
-        console.log("in else)")
+        // show default criminal list
         CriminalList()
     }
-        
-
 })
 
 const render = criminalCollection => {

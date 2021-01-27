@@ -31,13 +31,14 @@ export const ConvictionSelect = () => {
 }
 
 const _render = convictionsCollection => {
+
     contentTarget.innerHTML = `
         <select class="dropdown" id="crimeSelect">
             <option value="0">Please select a crime...</option>
             ${
-                convictionsCollection.map((conviction) =>{
-                    return `<option>${conviction.name}</option>`
-                }).join("")
+                convictionsCollection.map((conviction) =>
+                    `<option value="${conviction.id}">${conviction.name}</option>`
+                ).join("")
             }
         </select>
     `
