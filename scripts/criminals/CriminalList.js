@@ -53,7 +53,7 @@ const render = criminalCollection => {
     contentElement.innerHTML = `
         <h2>Glassdale's Criminals</h2>
         <section class="criminalList">
-            ${criminalCollection.map((criminalObj)=> Criminal(criminalObj))}
+            ${criminalCollection.map((criminalObj)=> Criminal(criminalObj)).join("")}
         </section>   
     `
 }
