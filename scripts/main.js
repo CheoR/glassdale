@@ -8,22 +8,9 @@
 // getCriminals()
 // let criminals = useCriminals()
 import { CriminalList } from "./criminals/CriminalList.js"
+import { ConvictionSelect } from "./convictions/ConvictionSelect.js"
+import { OfficerSelect } from "./officers/OfficerSelect.js"
 
 CriminalList();
-
-import { ConvictionSelect } from "./convictions/ConvictionSelect.js"
 ConvictionSelect();
-
-// import { OfficerList } from "./officers/OfficerList.js"
-
-// OfficerList();
-
-// import { useConvictions, getConvictions } from "./convictions/ConvictionProvider.js"
-// import { useCriminals } from "./criminals/CriminalDataProvider.js"
-
-// getConvictions()
-//     .then(() => {
-//         const convictions = useConvictions()
-//         console.table(convictions)
-//         console.log("end")
-//     })
+OfficerSelect();
