@@ -23,6 +23,16 @@ const _render = () => {
     `
 }
 
+// handle browswer-generated click event in noteForm component
+const eventHub = document.querySelector(".container")
+
+eventHub.addEventListener("click", clickEvent => {
+    clickEvent.preventDefault()
+    if(clickEvent.target.id === "saveNote") {
+        console.log("look at me")
+    }
+})
+
       // <input id="submit" type="submit" value="Submit" />
       // <button id="saveNote">Save Note</button>
 
