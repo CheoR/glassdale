@@ -1,21 +1,27 @@
+import { saveNote } from "./NoteDataProvider.js"
+
 const contentTarget = document.querySelector(".noteFormContainer")
 
-const _render = () => {
-    contentTarget.innerHTML = `
-     <form action="" method="get" class="noteForm">
+const _render = () => { 
+    // TODO: dropdown stopped working, why?
+    // TODO: Dropdown requires YYYY/MM/DD format, however
+    //  would like YYYY/MM/DD - 24HR TIME to be saved in db
+    //  at the moment cannot use one variable for both
+
+    let date = new Date().toISOString().split('T')[0]
+
+    contentTarget.innerHTML =  `
+     <form action="" method="POST" class="noteForm">
+
       <fieldset>
        <label for="entryDate">Entry Date</label>
-       <input type="date" name="entryDate" id="entryDate">
+       <input type="date" name="entryDate" id="entryDate" value=${date}>
 
        <label for="suspect">Suspect: </label>
        <input type="text" name="suspect" id="suspect" required>
 
-
        <label for="noteEntry">Notes</label>
-
-       <textarea id="noteEntry" name="noteEntry"
-        rows="5" cols="33" placeholder="Notes about case . . ">
-       </textarea>
+       <textarea id="noteEntry" name="noteEntry" rows="5" cols="33" placeholder="Notes about case . . " required ></textarea>
       </fieldset>
 
       <button type="submit" value="Submit" id="saveNote">Save Note</button>
@@ -29,7 +35,18 @@ const eventHub = document.querySelector(".container")
 eventHub.addEventListener("click", clickEvent => {
     clickEvent.preventDefault()
     if(clickEvent.target.id === "saveNote") {
-        console.log("look at me")
+        console.log("in the click event")
+        const newNote = {
+            entryDate: document.querySelector("#entryDate").value,
+            suspect: document.querySelector("#suspect").value,
+            noteEntry: document.querySelector("#noteEntry").value
+        }
+
+        if (newNote.suspect && newNote.noteEntry) {
+            saveNote(newNote)
+        } else {
+            console.log("Did not save empty record")
+        }
     }
 })
 

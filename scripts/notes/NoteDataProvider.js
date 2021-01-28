@@ -4,7 +4,7 @@ let notesUrl = "http://localhost:8088/notes"
 export const useNotes = () => _notes.slice()
 
 export const getNotes = () => {
-    return fetch(notesUrl)
+    return fetch("http://localhost:8088/notes")
         .then(response => response.json())
         .then(notes => {
         _notes = notes
@@ -12,7 +12,8 @@ export const getNotes = () => {
 }
 
 export const saveNote = (note) => {
-    return fetch(notesUrl, {
+
+    return fetch("http://localhost:8088/notes", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
