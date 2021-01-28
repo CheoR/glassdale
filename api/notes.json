@@ -59,6 +59,12 @@
       "suspect": "Taco Man",
       "noteEntry": "Stole tacos.",
       "id": 10
+    },
+    {
+      "entryDate": "1/28/2021, 11:26 AM",
+      "suspect": "BurritoMan",
+      "noteEntry": "Burned Burritos",
+      "id": 11
     }
   ]
 }
