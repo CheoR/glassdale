@@ -36,8 +36,19 @@ eventHub.addEventListener("click", clickEvent => {
     clickEvent.preventDefault()
     if(clickEvent.target.id === "saveNote") {
         console.log("in the click event")
+        // //document.querySelector("#entryDate").value,
+
+        const dateObj = new Date();  
+        const options = {
+            hour: '2-digit',
+            minute: '2-digit',
+            year: "numeric",  
+            month: "numeric",  
+            day: "numeric"
+        }  
+
         const newNote = {
-            entryDate: document.querySelector("#entryDate").value,
+            entryDate: `${ dateObj.toLocaleDateString('en-US', options) }`,
             suspect: document.querySelector("#suspect").value,
             noteEntry: document.querySelector("#noteEntry").value
         }
