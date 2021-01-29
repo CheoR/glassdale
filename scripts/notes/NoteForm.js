@@ -35,7 +35,6 @@ const eventHub = document.querySelector(".container")
 eventHub.addEventListener("click", clickEvent => {
     clickEvent.preventDefault()
     if(clickEvent.target.id === "saveNote") {
-        console.log("in the click event")
         // //document.querySelector("#entryDate").value,
 
         const dateObj = new Date();  
