@@ -2,11 +2,6 @@ export const Alibi = ( criminal )=> `<button id="associates--${criminal.id}">Ass
 
 const eventHub = document.querySelector(".container")
 
-// eventHub.addEventListener("alibisChosen", event => {
-
-//  console.log("aliis button chosen")
-// })
-
 /*
  1. when user clicks alibi button
   1a. dispatch event
@@ -16,9 +11,19 @@ const eventHub = document.querySelector(".container")
 
 */
 eventHub.addEventListener("click", event => {
- console.log("in event listener")
- console.table(event)
- console.table(event.target)
+  if(event.target.id.includes("associates")) {
+    const [associates, id]  = event.target.id.split("--")
+
+    console.log("this is associate ", id)
+
+    const customEvent = new CustomEvent("alibisChosen", {
+      detail: {
+       forAssociates: associates,
+       criminalId: id
+      }
+    })
+    eventHub.dispatchEvent(customEvent)
+  }
 })
 
 // // listen for change event

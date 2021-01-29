@@ -14,17 +14,10 @@ import { NoteForm } from "./notes/NoteForm.js"
 import { getNotes, useNotes } from "./notes/NoteDataProvider.js"
 import { ShowNoteButton } from "./notes/ShowNotesButton.js"
 import { NoteList } from "./notes/NoteList.js"
+import { AlibiList } from "./alibis/AlibiList.js"
 
 CriminalList();
 ConvictionSelect();
 OfficerSelect();
 NoteForm();
-
-getNotes()
- .then(() => {
-  const notes = useNotes()
-  console.log("nots so far")
-  console.table(notes)
- })
-
- ShowNoteButton()
+ShowNoteButton()
