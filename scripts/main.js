@@ -15,6 +15,7 @@ import { getNotes, useNotes } from "./notes/NoteDataProvider.js"
 import { ShowNoteButton } from "./notes/ShowNotesButton.js"
 import { NoteList } from "./notes/NoteList.js"
 import { AlibiList } from "./alibis/AlibiList.js"
+import { WitnessList } from "./witnesses/WitnessList.js"
 
 CriminalList();
 ConvictionSelect();

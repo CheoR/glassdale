@@ -1,7 +1,6 @@
 import { useAssociates } from "./AlibiDataProvider.js"
 import { useCriminals, getCriminals } from "../criminals/CriminalDataProvider.js"
 
-// let _accociates = []
 const eventHub = document.querySelector(".container")
 
 eventHub.addEventListener("alibisChosen", clickEvent => {
