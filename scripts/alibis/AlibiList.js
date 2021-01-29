@@ -4,12 +4,9 @@ import { useCriminals, getCriminals } from "../criminals/CriminalDataProvider.js
 const eventHub = document.querySelector(".container")
 
 eventHub.addEventListener("alibisChosen", clickEvent => {
- console.log("alibsChosen event listener loaded")
- console.table(clickEvent.detail.forAssociates)
- console.log(clickEvent.detail.forAssociates)
+
  if(clickEvent.detail.forAssociates === "associates") {
   const criminalId = parseInt(clickEvent.detail.criminalId)
-  console.log("fetching associates for ", criminalId)
   AlibiList(criminalId)
  }
 })
@@ -25,7 +22,6 @@ export const AlibiList = (criminalId) => {
    const criminalData = criminalsArray.filter((criminal) => criminal.id === criminalId)[0]
    _render(criminalData)
   })
- console.log("alibis list loaded")
 }
 
 

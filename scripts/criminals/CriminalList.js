@@ -4,26 +4,8 @@ import { useConvictions } from "../convictions/ConvictionProvider.js"
 import { useOfficers } from "../officers/OfficerProvider.js";
 
 let contentElement = document.querySelector(".criminalsContainer")
-// export const CriminalList = () => {
-//     getCriminals()
-//         .then(() => {
-//         const criminals = useCriminals()
-//         let criminalHTMLRepresentation = ""
-
-//         for (let criminal of criminals) {
-//             criminalHTMLRepresentation += Criminal(criminal)
-//         }
-//         contentElement.innerHTML = `
-//         <h2>Glassdale's Criminals</h2>
-//         <section class="criminalList">
-//                 ${criminalHTMLRepresentation}
-//         </section>        
-//         `
-//     })
-// }
 
 const appStateCriminals = [];
-
 
 const eventHub = document.querySelector(".container")
 
@@ -99,12 +81,6 @@ eventHub.addEventListener("officerChosen", event => {
    
     const officerNum = event.detail.officerChosen
 
-    // 1. get array of all officers
-    //  1a. get officer name using officernum/id
-    // 2. get array of all crimnals
-    //  2a. get criminal obj by comparing officer.name to criminalObj.arrestingOfficer
-    // 3. send resulting criminal array to render
-
     const officerArray = useOfficers()
     const criminalArray = useCriminals()
 
@@ -113,7 +89,6 @@ eventHub.addEventListener("officerChosen", event => {
 
     render(arrestedCriminals)
    } else {
-       // show default criminal list
        CriminalList()
    }
 })

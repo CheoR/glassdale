@@ -25,7 +25,6 @@ export const saveNote = (note) => {
 }
 
 
-
 const eventHub = document.querySelector(".container")
 
 const dispatchStateChangeEvent = () => {

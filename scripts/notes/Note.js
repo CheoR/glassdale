@@ -7,6 +7,3 @@ export const NoteHTMLConverter = (noteObject) => {
         </section>
     `
 }
-
-//             <div class="note__author">Author: ${ noteObject.author }</div>
-//             <div class="note__timestamp">Timestamp: ${ new Date(noteObject.date).toLocaleDateString('en-US')  }</div>
