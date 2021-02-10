@@ -44,7 +44,7 @@ eventHub.addEventListener("crimeChosen", event => {
     }
 })
 
-const render = criminalCollection => {
+const render = (criminalCollection) => {
 
     contentElement.innerHTML = `
         <h2>Glassdale's Criminals</h2>
@@ -52,7 +52,25 @@ const render = criminalCollection => {
             ${criminalCollection.map((criminalObj)=> Criminal(criminalObj)).join("")}
         </section>   
     `
+
+    const customEvent = new CustomEvent("criminalsAdded", {
+        detail: {
+            criminalsRendered: true
+        }
+    })
+    eventHub.addEventListener("load", event => {
+        console.log("Criminals rendered")
+    })
+
+        
+    eventHub.dispatchEvent(customEvent)
+    console.log("crminal list distpached")
+
 }
+
+
+
+
 // Initially render all criminals
 export const CriminalList = () => {
     getCriminals()

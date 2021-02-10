@@ -5,7 +5,6 @@ eventHub.addEventListener("click", clickEvent => {
  clickEvent.preventDefault()
  if(clickEvent.target.id === "showNotes") {
   const customEvent = new CustomEvent("showNotesClicked")
-  console.log("show notes clicked")
   eventHub.dispatchEvent(customEvent)
  }
 })

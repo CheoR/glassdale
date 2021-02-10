@@ -48,6 +48,7 @@ eventHub.addEventListener("click", clickEvent => {
             noteEntry: document.querySelector("#noteEntry").value
         }
 
+
         if (newNote.suspect && newNote.noteEntry) {
             saveNote(newNote)
         } else {

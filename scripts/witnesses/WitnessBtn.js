@@ -9,8 +9,8 @@ const _render = () => {
  contentTarget.innerHTML += '<button id="witness--btn">Witness Statements</button>'
 }
 eventHub.addEventListener("click", clickEvent => {
+ clickEvent.preventDefault()
  if(clickEvent.target.id.includes("witness")) {
-  console.log("witness me")
 
   const customEvent = new CustomEvent("witnessBtnClicked", {
    detail: {

@@ -10,29 +10,28 @@ getWitnesses()
  })
 
 export const WitnessList = () => {
- console.log("you are in witness list")
  _render(_withnesses)
 }
 
 eventHub.addEventListener("witnessBtnClicked", clickEvent => {
  if(clickEvent.detail.getWitnesses) {
-  console.log("if statemen witnesses")
- 
   WitnessList()
  }
 })
 
 const _render = (witnesses) => {
- console.log("you are in render")
- console.table(witnesses)
+
  const contentTarget = document.querySelector(".witnessList")
- const showsCriminals = document.querySelector(".criminalList")
- console.log("criminals")
- console.table(showsCriminals.innerHTML)
-console.table(showsCriminals.length)
+
+ console.log("am in witness list checking for criminals rendered")
+
+eventHub.addEventListener("criminalsAdded", event => {
+  console.log("checking for criminals rendered")
+  console.log(event.detail)
+})
 
  contentTarget.innerHTML += `
- <h2>Criminals</h2>
+ <h2>Witnesses</h2>
  <section class="withnesses">
   ${witnesses.map((withness)=> Witness(withness)).join("")}
  </section>
