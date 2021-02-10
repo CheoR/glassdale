@@ -6,6 +6,7 @@ const eventHub = document.querySelector(".container")
 eventHub.addEventListener("alibisChosen", clickEvent => {
 
  if(clickEvent.detail.forAssociates === "associates") {
+
   const criminalId = parseInt(clickEvent.detail.criminalId)
   AlibiList(criminalId)
  }
@@ -27,6 +28,7 @@ export const AlibiList = (criminalId) => {
 
 const _render = (criminal) => {
  const contentElement = document.querySelector(".alibiList")
+
  contentElement.innerHTML = `
      <h2>${criminal.name}</h2>
      <p>Arresting Officer: ${criminal.arrestingOfficer}

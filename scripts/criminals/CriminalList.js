@@ -62,10 +62,7 @@ const render = (criminalCollection) => {
         console.log("Criminals rendered")
     })
 
-        
     eventHub.dispatchEvent(customEvent)
-    console.log("crminal list distpached")
-
 }
 
 
