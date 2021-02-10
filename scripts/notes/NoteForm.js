@@ -3,10 +3,6 @@ import { saveNote } from "./NoteDataProvider.js"
 const contentTarget = document.querySelector(".noteFormContainer")
 
 const _render = () => { 
-    // TODO: dropdown stopped working, why?
-    // TODO: Dropdown requires YYYY/MM/DD format, however
-    //  would like YYYY/MM/DD - 24HR TIME to be saved in db
-    //  at the moment cannot use one variable for both
 
     let date = new Date().toISOString().split('T')[0]
 
@@ -52,6 +48,7 @@ eventHub.addEventListener("click", clickEvent => {
             noteEntry: document.querySelector("#noteEntry").value
         }
 
+
         if (newNote.suspect && newNote.noteEntry) {
             saveNote(newNote)
         } else {
@@ -60,19 +57,6 @@ eventHub.addEventListener("click", clickEvent => {
     }
 })
 
-      // <input id="submit" type="submit" value="Submit" />
-      // <button id="saveNote">Save Note</button>
-
-       // <label for="mood-select">Mood:</label>
-       // <select name="mood" id="mood-select">
-       //  <option value="">--How am I feeling?--</option>
-       //  <option value="anxious">Anxious</option>
-       //  <option value="stressed">Stressed</option>
-       //  <option value="angry">Angry</option>
-       //  <option value="silly">Silly</option>
-       //  <option value="good">Good</option>
-       //  <option value="iCanDoThis">I can do this</option>
-       // </select>
 export const NoteForm = () => {
     _render()
 }
