@@ -32,3 +32,10 @@ const dispatchStateChangeEvent = () => {
 
     eventHub.dispatchEvent(noteStateChangedEvent)
 }
+
+export const deleteNote = ( noteId ) => {
+    return fetch(`http://localhost:8088/notes/${noteId}`, {
+        method: "DELETE"
+    }) // fetch
+        .then(getNotes)
+} // deleteNote
