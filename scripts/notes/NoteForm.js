@@ -1,4 +1,3 @@
-import { Criminal } from "../criminals/Criminal.js"
 import { saveNote } from "./NoteDataProvider.js"
 import { CriminalSelector } from "../criminals/CriminalSelector.js"
 
@@ -53,9 +52,14 @@ eventHub.addEventListener("click", clickEvent => {
 
         const newNote = {
             entryDate: `${ dateObj.toLocaleDateString('en-US', options) }`,
-            suspect: document.querySelector("#suspect").value,
+            suspect: parseInt(document.querySelector("#noteForm--criminal").value),
             noteEntry: document.querySelector("#noteEntry").value
         }
+        // const noteToSave = {
+        //     text: noteText,
+        //     criminalId: selectedCriminalId
+        // }
+
 
 
         if (newNote.suspect && newNote.noteEntry) {
