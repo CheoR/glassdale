@@ -1,29 +1,37 @@
 import { saveNote } from "./NoteDataProvider.js"
+import { CriminalSelector } from "../criminals/CriminalSelector.js"
 
-const contentTarget = document.querySelector(".noteFormContainer")
 
 const _render = () => { 
-
+    
+    const contentTarget = document.querySelector(".noteFormContainer")
     let date = new Date().toISOString().split('T')[0]
 
     contentTarget.innerHTML =  `
-     <form action="" method="POST" class="noteForm">
+    <form action="" method="POST" class="noteForm">
 
-      <fieldset>
-       <label for="entryDate">Entry Date</label>
-       <input type="date" name="entryDate" id="entryDate" value=${date}>
+        <fieldset>
+        <label for="entryDate">Entry Date</label>
+        <input type="date" name="entryDate" id="entryDate" value=${date}>
 
-       <label for="suspect">Suspect: </label>
-       <input type="text" name="suspect" id="suspect" required>
+        <label for="noteForm--criminal">Suspect:</label>
+        <select id="noteForm--criminal" class="criminalSelect" required>
+            <option value="0">Select suspect</option>
+        </select>
 
-       <label for="noteEntry">Notes</label>
-       <textarea id="noteEntry" name="noteEntry" rows="5" cols="33" placeholder="Notes about case . . " required ></textarea>
-      </fieldset>
+        <label for="noteEntry">Notes</label>
+        <textarea id="noteEntry" name="noteEntry" rows="5" cols="33" placeholder="Notes about case . . " required ></textarea>
+        </fieldset>
 
-      <button type="submit" value="Submit" id="saveNote">Save Note</button>
-     </form>
+        <button type="submit" value="Submit" id="saveNote">Save Note</button>
+    </form>
     `
-}
+
+    /*
+        Populate criminal selections.,
+    */
+    CriminalSelector()
+} // _render
 
 // handle browswer-generated click event in noteForm component
 const eventHub = document.querySelector(".container")
@@ -44,9 +52,14 @@ eventHub.addEventListener("click", clickEvent => {
 
         const newNote = {
             entryDate: `${ dateObj.toLocaleDateString('en-US', options) }`,
-            suspect: document.querySelector("#suspect").value,
+            suspect: parseInt(document.querySelector("#noteForm--criminal").value),
             noteEntry: document.querySelector("#noteEntry").value
         }
+        // const noteToSave = {
+        //     text: noteText,
+        //     criminalId: selectedCriminalId
+        // }
+
 
 
         if (newNote.suspect && newNote.noteEntry) {
