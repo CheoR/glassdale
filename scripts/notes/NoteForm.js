@@ -1,29 +1,40 @@
 import { saveNote } from "./NoteDataProvider.js"
+import { getCriminals, useCriminals } from "../criminals/CriminalDataProvider.js"
+
 
 const contentTarget = document.querySelector(".noteFormContainer")
 
 const _render = () => { 
 
     let date = new Date().toISOString().split('T')[0]
+    let _criminals
+    getCriminals()
+        .then(() => {
 
-    contentTarget.innerHTML =  `
-     <form action="" method="POST" class="noteForm">
+            _criminals = useCriminals()
+            const criminalsOptionHTML = _criminals.map((criminalObj) => `<option value="${criminalObj.id}">${criminalObj.name}</option>`) // criminalOptionHTML
 
-      <fieldset>
-       <label for="entryDate">Entry Date</label>
-       <input type="date" name="entryDate" id="entryDate" value=${date}>
+            contentTarget.innerHTML =  `
+            <form action="" method="POST" class="noteForm">
 
-       <label for="suspect">Suspect: </label>
-       <input type="text" name="suspect" id="suspect" required>
+            <fieldset>
+            <label for="entryDate">Entry Date</label>
+            <input type="date" name="entryDate" id="entryDate" value=${date}>
 
-       <label for="noteEntry">Notes</label>
-       <textarea id="noteEntry" name="noteEntry" rows="5" cols="33" placeholder="Notes about case . . " required ></textarea>
-      </fieldset>
+            <label for="noteForm--criminal">Suspect:</label>
+            <select id="noteForm--criminal" class="criminalSelect" required>
+                ${criminalsOptionHTML}
+            </select>
 
-      <button type="submit" value="Submit" id="saveNote">Save Note</button>
-     </form>
-    `
-}
+            <label for="noteEntry">Notes</label>
+            <textarea id="noteEntry" name="noteEntry" rows="5" cols="33" placeholder="Notes about case . . " required ></textarea>
+            </fieldset>
+
+            <button type="submit" value="Submit" id="saveNote">Save Note</button>
+            </form>
+            `
+        }) // getCriminals
+} // _render
 
 // handle browswer-generated click event in noteForm component
 const eventHub = document.querySelector(".container")
