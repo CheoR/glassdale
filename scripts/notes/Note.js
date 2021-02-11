@@ -6,6 +6,7 @@ export const NoteHTMLConverter = (noteObject, criminalsArray) => {
             <div class="note__suspect">Title: ID:${ noteObject.suspect } - ${criminal.name}</div>
             <div class="note__timestamp">Timestamp: ${ noteObject.entryDate  }</div>
             <div class="note__text">${ noteObject.noteEntry }</div>
+            <button class="btn--delete" id="deleteNote--${noteObject.id}">Delete</button>
         </section>
     `
 }

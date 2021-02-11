@@ -79,3 +79,11 @@ fieldset {
   display: flex;
   flex: 1;
 } */
+
+.btn--delete {
+  display: block;
+  margin: 0 auto;
+  padding: 1em;
+  background-color: red;
+  border-radius: 15px;
+}
