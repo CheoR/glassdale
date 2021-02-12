@@ -2,6 +2,8 @@ import { getCriminals, useCriminals } from "./CriminalDataProvider.js"
 import { Criminal } from "./Criminal.js"
 import { useConvictions } from "../convictions/ConvictionProvider.js"
 import { useOfficers } from "../officers/OfficerProvider.js";
+import { getFacilities, useFacilities } from "../facility/FacilityProvider.js";
+import { getCriminalFacilities, useCriminalFacilities } from "../facility/CriminalFacilityProvider.js";
 
 let contentElement = document.querySelector(".criminalsContainer")
 
@@ -44,12 +46,35 @@ eventHub.addEventListener("crimeChosen", event => {
     }
 })
 
-const render = (criminalCollection) => {
+const render = (criminals, facilities, relationshipBetween) => {
+    // 1. iterat criminals
+    // 2. filter relatinsihps only for said triminal
+    // 3. convert relationshps to facities with map
+    // 4. pass to crminal compeonent
+
+    /*
+        Returns list of Criminal elements.
+    */
+    const criminalFacilityRelationships = criminals.map((criminal) => {
+        /*
+            Filter facilities from bridge table by criminal id.
+        */
+
+        const facilitiesCriminalSpentTimeAt = relationshipBetween.filter((facility) => facility.criminalId === criminal.id)
+
+        /*
+            Map bridge table facility information with facilities table.
+        */
+
+        const facilityNames = facilitiesCriminalSpentTimeAt.map((location) => facilities.find((facility) => facility.id === location.facilityId)) // facilitiesCriminalSpentTimeAt.map
+
+        return Criminal(criminal, facilityNames)
+    }).join(""); // criminals.map
 
     contentElement.innerHTML = `
         <h2>Glassdale's Criminals</h2>
         <section class="criminalList">
-            ${criminalCollection.map((criminalObj)=> Criminal(criminalObj)).join("")}
+            ${criminalFacilityRelationships}
         </section>   
     `
 
@@ -63,18 +88,23 @@ const render = (criminalCollection) => {
     })
 
     eventHub.dispatchEvent(customEvent)
-}
+} // render
 
 
 
 
 // Initially render all criminals
 export const CriminalList = () => {
-    getCriminals()
+    getFacilities()
+        .then(getCriminalFacilities)
         .then(() => {
-            const appStateCriminals = useCriminals()
-            render(appStateCriminals)
-        })
+
+            const facilities = useFacilities()
+            const criminalFacilities = useCriminalFacilities()
+            const criminals = useCriminals()
+
+            render(criminals, facilities, criminalFacilities)
+        }) // getFacilities
 }
 
 eventHub.addEventListener("officerChosen", event => {
