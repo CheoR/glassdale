@@ -139,7 +139,9 @@ eventHub.addEventListener("officerChosen", event => {
 })
 
 eventHub.addEventListener("facilitiesButtonClicked", clickEvent => {
-    if(clickEvent.detail.showFacilities) {
-        console.log("showFacilities in criminal list")
+    if(clickEvent.detail.hideCriminalList) {
+        contentElement.innerHTML = ""
+    } else {
+        CriminalList()
     }
 }) // eventHub - facilitiesButtonClicked
