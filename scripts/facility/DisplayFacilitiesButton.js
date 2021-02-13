@@ -2,7 +2,7 @@ export const DisplayFacilitiesButton = () => `<button id="displayFacilities">Dis
 
 const contentTarget = document.querySelector(".filters")
 const eventHub = document.querySelector(".container")
-let _hide = false
+let _hide = true
 
 eventHub.addEventListener("click", clickEvent => {
 
