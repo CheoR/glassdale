@@ -23,27 +23,10 @@ const _render = (witnesses) => {
 
  const contentTarget = document.querySelector(".witnessList")
 
- console.log("am in witness list checking for criminals rendered")
-
-eventHub.addEventListener("criminalsAdded", event => {
-  console.log("checking for criminals rendered")
-  console.log(event.detail)
-})
-
- contentTarget.innerHTML += `
+ contentTarget.innerHTML = `
  <h2>Witnesses</h2>
  <section class="withnesses">
   ${witnesses.map((withness)=> Witness(withness)).join("")}
  </section>
  `
 }
-
-/*
- when witness statements click
- check to see if there's something already populating the screen
- if populating the screen
-  remove from dome
-  render new items
- if nothing populating
-  render new itme
-*/

@@ -5,11 +5,13 @@ import { useOfficers } from "../officers/OfficerProvider.js";
 import { getFacilities, useFacilities } from "../facility/FacilityProvider.js";
 import { getCriminalFacilities, useCriminalFacilities } from "../facility/CriminalFacilityProvider.js";
 import { FacilityList } from "../facility/FacilityList.js"
+import { WitnessList } from "../witnesses/WitnessList.js"
 
 const contentElement = document.querySelector(".criminalsContainer")
 const appStateCriminals = [];
 
 const eventHub = document.querySelector(".container")
+let _hideCriminalList = true
 
 // Listen for custom event dispatched fro ConvictionSelect
 // custom event named "crimeChosen"
@@ -133,10 +135,6 @@ eventHub.addEventListener("officerChosen", event => {
     const arrestingOfficer = officerArray.find((officer) => officer.id === parseInt(officerNum))
     const arrestedCriminals = criminalArray.filter((criminal) => criminal.arrestingOfficer === arrestingOfficer.name)
 
-    /*
-        TODO: UPDATE RENDER IN officerChosen AND crimeChosen EVENTLISTENERS TO MATCH THE NEW RENDER FUNCTION DEFINITION.
-        ELSE GIVES YOU ERROR AFTER DROPDOWN SELECTION
-    */
     render(arrestedCriminals, facilitiesArray, criminalFacilitiesArray)
    } else {
        CriminalList()
@@ -145,10 +143,42 @@ eventHub.addEventListener("officerChosen", event => {
 
 eventHub.addEventListener("facilitiesButtonClicked", clickEvent => {
     // const contentElement = document.querySelector(".criminalsContainer")
-
-    if(clickEvent.detail.hideCriminalList) {
+    console.log(" facilities button clicked ")
+    if(_hideCriminalList) {
+        console.log("\trendering failcities list")
+        const contentElement = document.querySelector(".criminalsContainer")
         contentElement.innerHTML = ""
         FacilityList()
+        console.log(`failcities list is _hideCriminalList true: ${_hideCriminalList}`)
+
+        _hideCriminalList = !_hideCriminalList
+        console.log(`failcities list is _hideCriminalList true: ${_hideCriminalList}`)
+    } else {
+        const contentElement = document.querySelector(".facilityContainer")
+        console.log("rendering criminal list")
+        contentElement.innerHTML = ""
+        CriminalList()
+        console.log(`criminal list is _hideCriminalList true: ${_hideCriminalList}`)
+        _hideCriminalList = !_hideCriminalList
+        console.log(`criminal list is _hideCriminalList true: ${_hideCriminalList}`)
+
+    }
+
+    // if(clickEvent.detail.hideCriminalList) {
+    //     contentElement.innerHTML = ""
+    //     FacilityList()
+    // } else {
+    //     CriminalList()
+    // }
+}) // eventHub - facilitiesButtonClicked
+
+
+eventHub.addEventListener("witnessBtnClicked", clickEvent => {
+    // const contentElement = document.querySelector(".criminalsContainer")
+
+    if(clickEvent.detail.getWitnesses) {
+        contentElement.innerHTML = ""
+        WitnessList()
     } else {
         CriminalList()
     }
