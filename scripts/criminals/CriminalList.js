@@ -5,10 +5,13 @@ import { useOfficers } from "../officers/OfficerProvider.js";
 import { getFacilities, useFacilities } from "../facility/FacilityProvider.js";
 import { getCriminalFacilities, useCriminalFacilities } from "../facility/CriminalFacilityProvider.js";
 import { FacilityList } from "../facility/FacilityList.js"
+import { WitnessList } from "../witnesses/WitnessList.js"
 
+const contentElement = document.querySelector(".criminalsContainer")
 const appStateCriminals = [];
 
 const eventHub = document.querySelector(".container")
+let _hideCriminalList = true
 
 // Listen for custom event dispatched fro ConvictionSelect
 // custom event named "crimeChosen"
@@ -32,13 +35,15 @@ eventHub.addEventListener("crimeChosen", event => {
        const convictionNum = event.detail.crimeThatWasChosen
 
        const officerArray = useConvictions()
+        const facilitiesArray = useFacilities()
+        const criminalFacilitiesArray = useCriminalFacilities()
 
        // Get conviction object by id
         const convictionObjFromId = officerArray.find((officerObj) => officerObj.id === parseInt(convictionNum))
 
         const appStateCriminals = useCriminals()
         const matchingCriminals = appStateCriminals.filter((criminalObj) => criminalObj.conviction === convictionObjFromId.name)    
-        render(matchingCriminals)
+        render(matchingCriminals, facilitiesArray, criminalFacilitiesArray)
     } else {
         // show default criminal list
         CriminalList()
@@ -46,7 +51,7 @@ eventHub.addEventListener("crimeChosen", event => {
 })
 
 const render = (criminals, facilities, relationshipBetween) => {
-    const contentElement = document.querySelector(".criminalsContainer")
+    // const contentElement = document.querySelector(".criminalsContainer")
 
     /*
         Returns list of Criminal elements.
@@ -124,23 +129,44 @@ eventHub.addEventListener("officerChosen", event => {
 
     const officerArray = useOfficers()
     const criminalArray = useCriminals()
+    const facilitiesArray = useFacilities()
+    const criminalFacilitiesArray = useCriminalFacilities()
 
     const arrestingOfficer = officerArray.find((officer) => officer.id === parseInt(officerNum))
     const arrestedCriminals = criminalArray.filter((criminal) => criminal.arrestingOfficer === arrestingOfficer.name)
 
-    render(arrestedCriminals)
+    render(arrestedCriminals, facilitiesArray, criminalFacilitiesArray)
    } else {
        CriminalList()
    }
 })
 
 eventHub.addEventListener("facilitiesButtonClicked", clickEvent => {
-    const contentElement = document.querySelector(".criminalsContainer")
-
-    if(clickEvent.detail.hideCriminalList) {
+    if(_hideCriminalList) {
+        const contentElement = document.querySelector(".criminalsContainer")
         contentElement.innerHTML = ""
         FacilityList()
+        _hideCriminalList = !_hideCriminalList
     } else {
+        const contentElement = document.querySelector(".facilityContainer")
+        contentElement.innerHTML = ""
         CriminalList()
+        _hideCriminalList = !_hideCriminalList
+    }
+}) // eventHub - facilitiesButtonClicked
+
+
+eventHub.addEventListener("witnessBtnClicked", clickEvent => {
+    
+    if(clickEvent.detail.getWitnesses) {
+        const contentElement = document.querySelector(".criminalsContainer")
+        contentElement.innerHTML = ""
+        WitnessList()
+        _hideCriminalList = !_hideCriminalList
+    } else {
+        const contentElement = document.querySelector(".criminalsContainer")
+        contentElement.innerHTML = ""
+        CriminalList()
+        _hideCriminalList = !_hideCriminalList
     }
 }) // eventHub - facilitiesButtonClicked
