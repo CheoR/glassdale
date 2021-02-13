@@ -23,14 +23,3 @@ export const Criminal = (criminal, facilities) => {
     </div>
     `
 }
-
-
-
-    //     <div>
-    //     <h3>${criminal.name}</h3>
-    //     <p>Age: ${criminal.age}</p>
-    //     <p>Crime: ${criminal.conviction}</p>
-    //     <p>Term Start: ${new Date(criminal.incarceration.start).toLocaleDateString('en-US')}</p>
-    //     <p>Term End: ${new Date(criminal.incarceration.end).toLocaleDateString('en-US')}</p>
-    //     ${AlibiBtn(criminal)}
-    // </div>
