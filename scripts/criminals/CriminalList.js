@@ -142,44 +142,31 @@ eventHub.addEventListener("officerChosen", event => {
 })
 
 eventHub.addEventListener("facilitiesButtonClicked", clickEvent => {
-    // const contentElement = document.querySelector(".criminalsContainer")
-    console.log(" facilities button clicked ")
     if(_hideCriminalList) {
-        console.log("\trendering failcities list")
         const contentElement = document.querySelector(".criminalsContainer")
         contentElement.innerHTML = ""
         FacilityList()
-        console.log(`failcities list is _hideCriminalList true: ${_hideCriminalList}`)
-
         _hideCriminalList = !_hideCriminalList
-        console.log(`failcities list is _hideCriminalList true: ${_hideCriminalList}`)
     } else {
         const contentElement = document.querySelector(".facilityContainer")
-        console.log("rendering criminal list")
         contentElement.innerHTML = ""
         CriminalList()
-        console.log(`criminal list is _hideCriminalList true: ${_hideCriminalList}`)
         _hideCriminalList = !_hideCriminalList
-        console.log(`criminal list is _hideCriminalList true: ${_hideCriminalList}`)
-
     }
-
-    // if(clickEvent.detail.hideCriminalList) {
-    //     contentElement.innerHTML = ""
-    //     FacilityList()
-    // } else {
-    //     CriminalList()
-    // }
 }) // eventHub - facilitiesButtonClicked
 
 
 eventHub.addEventListener("witnessBtnClicked", clickEvent => {
-    // const contentElement = document.querySelector(".criminalsContainer")
-
+    
     if(clickEvent.detail.getWitnesses) {
+        const contentElement = document.querySelector(".criminalsContainer")
         contentElement.innerHTML = ""
         WitnessList()
+        _hideCriminalList = !_hideCriminalList
     } else {
+        const contentElement = document.querySelector(".criminalsContainer")
+        contentElement.innerHTML = ""
         CriminalList()
+        _hideCriminalList = !_hideCriminalList
     }
 }) // eventHub - facilitiesButtonClicked
