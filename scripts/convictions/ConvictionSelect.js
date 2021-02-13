@@ -25,7 +25,6 @@ export const ConvictionSelect = () => {
     .then(() => {
         const convictions = useConvictions()
         convictions.sort(_alphabetically)
-
         _render(convictions)
     })
 }

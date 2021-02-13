@@ -1,6 +1,7 @@
 export const DisplayFacilitiesButton = () => `<button id="displayFacilities">Display Facilities</button>`
 
-const contentTarget = document.querySelector(".filters")
+const contentTarget = document.querySelector(".filters__facilities")
+
 const eventHub = document.querySelector(".container")
 let _hide = true
 
