@@ -4,8 +4,7 @@ import { useConvictions } from "../convictions/ConvictionProvider.js"
 import { useOfficers } from "../officers/OfficerProvider.js";
 import { getFacilities, useFacilities } from "../facility/FacilityProvider.js";
 import { getCriminalFacilities, useCriminalFacilities } from "../facility/CriminalFacilityProvider.js";
-
-let contentElement = document.querySelector(".criminalsContainer")
+import { FacilityList } from "../facility/FacilityList.js"
 
 const appStateCriminals = [];
 
@@ -39,7 +38,7 @@ eventHub.addEventListener("crimeChosen", event => {
 
         const appStateCriminals = useCriminals()
         const matchingCriminals = appStateCriminals.filter((criminalObj) => criminalObj.conviction === convictionObjFromId.name)    
-    render(matchingCriminals)
+        render(matchingCriminals)
     } else {
         // show default criminal list
         CriminalList()
@@ -47,10 +46,7 @@ eventHub.addEventListener("crimeChosen", event => {
 })
 
 const render = (criminals, facilities, relationshipBetween) => {
-    // 1. iterat criminals
-    // 2. filter relatinsihps only for said triminal
-    // 3. convert relationshps to facities with map
-    // 4. pass to crminal compeonent
+    const contentElement = document.querySelector(".criminalsContainer")
 
     /*
         Returns list of Criminal elements.
@@ -137,3 +133,14 @@ eventHub.addEventListener("officerChosen", event => {
        CriminalList()
    }
 })
+
+eventHub.addEventListener("facilitiesButtonClicked", clickEvent => {
+    const contentElement = document.querySelector(".criminalsContainer")
+
+    if(clickEvent.detail.hideCriminalList) {
+        contentElement.innerHTML = ""
+        FacilityList()
+    } else {
+        CriminalList()
+    }
+}) // eventHub - facilitiesButtonClicked

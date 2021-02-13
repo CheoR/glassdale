@@ -17,6 +17,7 @@ import { NoteList } from "./notes/NoteList.js"
 import { AlibiList } from "./alibis/AlibiList.js"
 import { WitnessList } from "./witnesses/WitnessList.js"
 import { WitnessBtn } from "./witnesses/WitnessBtn.js"
+import "./facility/DisplayFacilitiesButton.js"
 
 CriminalList();
 ConvictionSelect();
